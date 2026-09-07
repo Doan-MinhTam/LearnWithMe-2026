@@ -13,4 +13,5 @@ One concept. One project. One step at a time.
 [📔✍️]
 🔗 Resources & Notes
 📝 **Notion Workspace (Theory & Learning Log):**
+01.OOP_Java
 [Click here to view Notion](https://app.notion.com/p/OOP_Java-3d4d261868b78015847bde6ed22e1576?source=copy_link)
