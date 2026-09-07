@@ -28,5 +28,14 @@ public class Expense {
     public String getDescription() {
         return description;
     }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "description='" + description + '\'' +
+                ", amount=" + amount +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }
 
