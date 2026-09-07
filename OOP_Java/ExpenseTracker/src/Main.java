@@ -26,8 +26,12 @@ public class Main {
                     scanner.nextLine();
                     System.out.print("Category: ");
                     String category = scanner.nextLine();
-                    Expense expense = new Expense(description, amount, category);
-                    expenseTracker.addExpense(expense);
+                    try {
+                        Expense expense = new Expense(description, amount, category);
+                        expenseTracker.addExpense(expense);
+                    } catch (Exception e) {
+                        System.out.println("Error: Amount must be greater than 0");
+                    }
                 }
                 case 2 -> expenseTracker.showExpenses();
                 case 3 -> System.out.println("Total Expense is: " + expenseTracker.getTotalExpenses());
@@ -39,6 +43,7 @@ public class Main {
                           String category = scanner.nextLine();
                           expenseTracker.showExpensesByCategory(category);}
                 case 0 -> System.out.println("EXITed!!");
+                default -> System.out.println("Error: Not in range!!!");
             }
         }
 
