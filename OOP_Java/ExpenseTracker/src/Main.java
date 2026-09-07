@@ -29,8 +29,8 @@ public class Main {
                     try {
                         Expense expense = new Expense(description, amount, category);
                         expenseTracker.addExpense(expense);
-                    } catch (Exception e) {
-                        System.out.println("Error: Amount must be greater than 0");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Error: " + e.getMessage());
                     }
                 }
                 case 2 -> expenseTracker.showExpenses();
