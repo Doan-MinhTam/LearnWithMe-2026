@@ -69,7 +69,9 @@ public class ExpenseTracker {
         if (countExpense == 0) {
             throw new NoSuchElementException("No expense match");
         }
+    }
 
-
+    public void getTotalByCategory(String category) {
+        
     }
 }
