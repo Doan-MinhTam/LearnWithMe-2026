@@ -14,6 +14,7 @@ public class Main {
                     "4. Remove expense\n" +
                     "5. Search by category\n" +
                     "6. Edit expense\n" +
+                    "7. Show expenses from [] to []\n" +
                     "0. Exit\n" +
                     "\n" +
                     "Choose an option:");
@@ -65,6 +66,13 @@ public class Main {
                     System.out.println("New date: ");
                     LocalDate newDate = LocalDate.parse(scanner.nextLine());
                     expenseTracker.editExpense(indexPosition - 1, newDes, newAmount, newCate, newDate);
+                }
+                case 7 -> {
+                    System.out.println("Start Date: ");
+                    LocalDate startDate = LocalDate.parse(scanner.nextLine());
+                    System.out.println("End Date: ");
+                    LocalDate endDate = LocalDate.parse(scanner.nextLine());
+                    expenseTracker.showExpensesByDate(startDate, endDate);
                 }
                 case 0 -> System.out.println("EXITed!!");
                 default -> System.out.println("Error: Not in range!!!");

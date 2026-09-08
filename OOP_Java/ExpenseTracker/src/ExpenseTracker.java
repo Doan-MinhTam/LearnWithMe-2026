@@ -1,5 +1,7 @@
+import java.rmi.NoSuchObjectException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class ExpenseTracker {
     ArrayList<Expense> expenses = new ArrayList<>();
@@ -51,5 +53,23 @@ public class ExpenseTracker {
         expenses.get(index).updateExpense(newDes, newAmount, newCate, newDate);
         expenses.get(index).updateExpense(newDes, newAmount, newCate, newDate);
         expenses.get(index).updateExpense(newDes, newAmount, newCate, newDate);
+    }
+
+    public void showExpensesByDate(LocalDate startDate, LocalDate endDate) {
+        int countExpense = 0;
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException("Start Date cant larger than End Date");
+        }
+        for (Expense expense : expenses) {
+            if (!(expense.getDate().isBefore(startDate)) && !(expense.getDate().isAfter(endDate))) {
+                System.out.println(expense);
+                countExpense++;
+            }
+        }
+        if (countExpense == 0) {
+            throw new NoSuchElementException("No expense match");
+        }
+
+
     }
 }
