@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ExpenseTracker {
@@ -20,7 +21,7 @@ public class ExpenseTracker {
     public double getTotalExpenses() {
         double totalExpenses = 0.0;
         for (int i = 0; i < expenses.size(); i++) {
-           totalExpenses += expenses.get(i).getAmount();
+            totalExpenses += expenses.get(i).getAmount();
         }
         return totalExpenses;
     }
@@ -45,9 +46,10 @@ public class ExpenseTracker {
             System.out.println("No category match");
         }
     }
-    public void editExpense(int index, String newDes,double newAmount,String newCate) {
-        expenses.get(index).updateExpense(newDes, newAmount, newCate);
-        expenses.get(index).updateExpense(newDes, newAmount, newCate);
-        expenses.get(index).updateExpense(newDes, newAmount, newCate);
+
+    public void editExpense(int index, String newDes, double newAmount, String newCate, LocalDate newDate) {
+        expenses.get(index).updateExpense(newDes, newAmount, newCate, newDate);
+        expenses.get(index).updateExpense(newDes, newAmount, newCate, newDate);
+        expenses.get(index).updateExpense(newDes, newAmount, newCate, newDate);
     }
 }

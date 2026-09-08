@@ -1,13 +1,19 @@
+import java.time.LocalDate;
+
 public class Expense {
     //Encapsulation: tính đóng gói
     // Object kiểm soát cách dữ liệu bên trong nó được truy cập
     private String description;
     private double amount;
     private String category;
+    private LocalDate date;
 
-    public Expense(String description, double amount, String category) {
+    public Expense(String description, double amount, String category, LocalDate date) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Amount must be greater than 0");
+        }
+        if (date == null) {
+            throw new IllegalArgumentException("You must add time");
         }
         if (description.isBlank() || category.isBlank()) {
             throw new IllegalArgumentException("You must type something");
@@ -15,6 +21,7 @@ public class Expense {
         this.description = description;
         this.amount = amount;
         this.category = category;
+        this.date = date;
     }
 
     public double getAmount() {
@@ -28,6 +35,11 @@ public class Expense {
     public String getDescription() {
         return description;
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
 
     public void setDescription(String description) {
         if (description.isBlank()) {
@@ -50,7 +62,14 @@ public class Expense {
         this.category = category;
     }
 
-    public void updateExpense(String description, double amount, String category) {
+    public void setDate(LocalDate date) {
+        if (date == null) {
+            throw new IllegalArgumentException();
+        }
+        this.date = date;
+    }
+
+    public void updateExpense(String description, double amount, String category, LocalDate date) {
 
         // Bước 1: kiểm tra tất cả dữ liệu
         if (description.isBlank()) {
@@ -58,6 +77,10 @@ public class Expense {
         }
 
         if (amount <= 0) {
+            throw new IllegalArgumentException();
+        }
+
+        if (date == null) {
             throw new IllegalArgumentException();
         }
 
@@ -69,6 +92,7 @@ public class Expense {
         this.description = description;
         this.amount = amount;
         this.category = category;
+        this.date = date;
     }
 
     @Override
@@ -77,6 +101,7 @@ public class Expense {
                 "description='" + description + '\'' +
                 ", amount=" + amount +
                 ", category='" + category + '\'' +
+                ", date=" + date +
                 '}';
     }
 }
