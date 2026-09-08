@@ -12,6 +12,7 @@ public class Main {
                     "3. Show total\n" +
                     "4. Remove expense\n" +
                     "5. Search by category\n" +
+                    "6. Edit expense\n" +
                     "0. Exit\n" +
                     "\n" +
                     "Choose an option:");
@@ -42,6 +43,20 @@ public class Main {
                 case 5 -> {System.out.println("Which category you want to search: ");
                           String category = scanner.nextLine();
                           expenseTracker.showExpensesByCategory(category);}
+                case 6 -> {
+                    System.out.println("Which expence do you want to change?: ");
+                    int indexPosition = scanner.nextInt();
+                    scanner.nextLine();
+
+                    System.out.println("New description: ");
+                    String newDes = scanner.nextLine();
+                    System.out.println("New amount: ");
+                    Double newAmount = scanner.nextDouble();
+                    scanner.nextLine();
+                    System.out.println("New category: ");
+                    String newCate = scanner.nextLine();
+                    expenseTracker.editExpense(indexPosition - 1, newDes, newAmount, newCate);
+                }
                 case 0 -> System.out.println("EXITed!!");
                 default -> System.out.println("Error: Not in range!!!");
             }

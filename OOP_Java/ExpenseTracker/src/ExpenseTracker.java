@@ -45,4 +45,9 @@ public class ExpenseTracker {
             System.out.println("No category match");
         }
     }
+    public void editExpense(int index, String newDes,double newAmount,String newCate) {
+        expenses.get(index).updateExpense(newDes, newAmount, newCate);
+        expenses.get(index).updateExpense(newDes, newAmount, newCate);
+        expenses.get(index).updateExpense(newDes, newAmount, newCate);
+    }
 }
