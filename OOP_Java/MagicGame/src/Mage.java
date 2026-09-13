@@ -3,9 +3,8 @@ public class Mage extends Character {
     private int maxMana;
     private int spellCost;
 
-    public Mage(String name, int maxHealth, int attackPower, int mana, int maxMana, int spellCost) {
+    public Mage(String name, int maxHealth, int attackPower, int maxMana, int spellCost) {
         super(name, maxHealth, attackPower);
-        this.mana = mana;
         this.maxMana = maxMana;
         this.spellCost = spellCost;
     }
@@ -17,7 +16,7 @@ public class Mage extends Character {
         }
         System.out.println(name + "cast a powerfull fireball at" +((Character)target).name + "!");
         this.mana -= spellCost;
-        target.takeDamage(mana);
+        target.takeDamage(attackPower);
     }
 
     public void recoverMana() {
