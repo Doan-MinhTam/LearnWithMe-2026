@@ -11,6 +11,7 @@ public abstract class Character implements Combatant {
         this.attackPower = attackPower;
     }
 
+    @Override
     public void takeDamage(int damage) {
         this.health -= damage;
         if (this.health < 0) {
@@ -19,6 +20,7 @@ public abstract class Character implements Combatant {
         System.out.println(this.name + "take" + damage + "damage, remaining health: " + this.health);
     }
 
+    @Override
     public boolean isAlive() {
         return this.health > 0;
     }
