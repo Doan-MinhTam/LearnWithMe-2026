@@ -6,6 +6,7 @@ public class Mage extends Character {
     public Mage(String name, int maxHealth, int attackPower, int maxMana, int spellCost) {
         super(name, maxHealth, attackPower);
         this.maxMana = maxMana;
+        this.mana = maxMana;
         this.spellCost = spellCost;
     }
 

@@ -10,7 +10,7 @@ public class Arena {
         int countTurn = 1;
         while (c1.isAlive() && c2.isAlive()){
             System.out.printf("Turn %d :", countTurn);
-            System.out.println("-------------------------------------------------");
+            System.out.println("----------------------------------------------------------");
 
             try {
                 System.out.println(attacker.name + " is attack " + target.name + " and cause " + attacker.attackPower + " damage");
