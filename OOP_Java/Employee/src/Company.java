@@ -21,8 +21,28 @@ public class Company {
     public double getTotalPayroll() {
         double total = 0;
         for (int i = 0; i < employeeCount; i++) {
-
+            total += employees[i].calculateSalary();
         }
         return total;
+    }
+
+    public Employee findHighestPaidEmployee() {
+        if (employeeCount == 0) {
+            return null;
+        }
+        Employee highestSalary = employees[0];
+        for (int i = 1; i < employeeCount; i++) {
+            if (employees[i].calculateSalary() > highestSalary.calculateSalary()) {
+                highestSalary = employees[i];
+            }
+        }
+        return highestSalary;
+    }
+
+    public void generateWorkReports() {
+        System.out.println("\n--- Work Reports for " + companyName + " ---");
+        for (int i = 0; i < employeeCount; i++) {
+            System.out.println(employees[i].getWorkReport());
+        }
     }
 }
