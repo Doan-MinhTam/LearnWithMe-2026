@@ -10,17 +10,34 @@ public class Library {
     }
 
     public void addBook(Book book){
-
+        if (bookCount < books.length) {
+            books[bookCount] = book;
+            bookCount++;
+            System.out.println("Added a book");
+        } else {
+            System.out.println("Library is full - Cannot add the book" + book.getTitle());
+        }
     }
 
     public void displayBooks(){
         System.out.println("\n---Books in " + this.name + " ---");
-
+        if (!(bookCount == 0)) {
+            for (int i = 0; i < bookCount - 1; i++) {
+                System.out.println(books[i].toString());
+            }
+        } else {
+            System.out.println("The library is empty");
+        }
     }
 
-    public Book findBookByTitle(){
-
-
+    public Book findBookByTitle(String title){
+        for (int i = 0; i <books.length; i++) {
+            if (books[i].getTitle().equalsIgnoreCase(title)) {
+                System.out.println("Found: " + books[i]);
+            } else {
+                System.out.println("Book not found.");
+            }
+        }
         return null;
     }
 }
