@@ -45,4 +45,12 @@ public class Company {
             System.out.println(employees[i].getWorkReport());
         }
     }
+
+    public void displayAllEmployees() {
+        System.out.println("\n--- Employee List for " + companyName + " ---");
+        for (int i = 0; i < employeeCount; i++) {
+            System.out.println(employees[i].toString());
+        }
+        System.out.println("------------------------------------");
+    }
 }
