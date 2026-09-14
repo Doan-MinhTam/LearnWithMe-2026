@@ -22,7 +22,7 @@ public class Library {
     public void displayBooks(){
         System.out.println("\n---Books in " + this.name + " ---");
         if (!(bookCount == 0)) {
-            for (int i = 0; i < bookCount - 1; i++) {
+            for (int i = 0; i < bookCount; i++) {
                 System.out.println(books[i].toString());
             }
         } else {
@@ -31,13 +31,14 @@ public class Library {
     }
 
     public Book findBookByTitle(String title){
-        for (int i = 0; i <books.length; i++) {
+        System.out.println("Searching for: " + title);
+        for (int i = 0; i < bookCount; i++) {
             if (books[i].getTitle().equalsIgnoreCase(title)) {
                 System.out.println("Found: " + books[i]);
-            } else {
-                System.out.println("Book not found.");
+                return books[i];
             }
         }
+        System.out.println("Book not found.");
         return null;
     }
 }
