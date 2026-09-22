@@ -24,9 +24,7 @@ public class VendingMachine {
         // TODO: Sinh viên duyệt ProductCatalog.getAllItems() và nối chuỗi (thêm ký tự đặc biệt xuống dòng)
         StringBuilder sb = new StringBuilder();
         for (Item item : ProductCatalog.getAllItems()) {
-            int quantity = itemInventory.getQuantity(item);
-            sb.append(item.getName()).append(": ").append(item.getPrice())
-                    .append(" VND (Còn lại: ").append(quantity).append(")\n");
+            sb.append(item.getName()).append(": ").append(item.getPrice()).append(" VND (Còn lại: ").append(itemInventory.getQuantity(item)).append(")");
         }
         return sb.toString();
     }
@@ -41,7 +39,6 @@ public class VendingMachine {
         // • Nếu còn: gán selectedItem = item và trả về thông báo.
         // • Nếu hết: ném ngoại lệ SoldOutException.
         if (itemInventory.hasItem(item)) {
-            selectedItem = item;
             return "Đã chọn " + item.getName() + " - Giá: " + item.getPrice() + " VND";
         } else {
             throw new VendingMachineExceptions.SoldOutException();
@@ -53,7 +50,7 @@ public class VendingMachine {
      * • Return Chuỗi thông báo: "Đã bỏ vào: [Mệnh giá] - Số dư hiện tại: [Tổng số dư]"
      * • Throws VendingMachineExceptions.InvalidCoinException nếu tiền không hợp lệ.
      */
-    public String insertCoin(long value) throws VendingMachineExceptions.InvalidCoinException {
+    public String insertCoin(long value) {
         // TODO: Kiểm tra Coin.isValid(value).
         // • Nếu hợp lệ: cộng currentBalance, add vào cashInventory và trả về thông báo.
         if (Coin.isValid(value)) {
