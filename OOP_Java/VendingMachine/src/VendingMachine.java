@@ -43,6 +43,7 @@ public class VendingMachine {
         } else {
             throw new VendingMachineExceptions.SoldOutException();
         }
+
     }
 
     /**
@@ -61,6 +62,7 @@ public class VendingMachine {
         } else {
             throw new VendingMachineExceptions.InvalidCoinException();
         }
+
     }
 
     /**
