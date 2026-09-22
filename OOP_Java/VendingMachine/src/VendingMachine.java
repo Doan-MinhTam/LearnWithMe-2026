@@ -39,11 +39,11 @@ public class VendingMachine {
         // • Nếu còn: gán selectedItem = item và trả về thông báo.
         // • Nếu hết: ném ngoại lệ SoldOutException.
         if (itemInventory.hasItem(item)) {
+            selectedItem=item;
             return "Đã chọn " + item.getName() + " - Giá: " + item.getPrice() + " VND";
         } else {
             throw new VendingMachineExceptions.SoldOutException();
         }
-
     }
 
     /**
@@ -62,16 +62,14 @@ public class VendingMachine {
         } else {
             throw new VendingMachineExceptions.InvalidCoinException();
         }
-
     }
-
     /**
      * [BÀI TẬP] Thực hiện giao dịch.
      * • gọi itemInventory.deduct(selectedItem) để giảm số lượng item trong máy
      * • Return Chuỗi thông báo: "Giao dịch thành công - Tiền thừa: [Số tiền thừa] VND"
      * • Throws VendingMachineExceptions.NotEnoughMoneyException nếu thiếu tiền.
      */
-    public String executeTransaction() throws VendingMachineExceptions.NotEnoughMoneyException {
+    public String executeTransaction() {
         // TODO: Kiểm tra selectedItem != null và currentBalance >= price.
         // • Trả kho, tính tiền thừa, gọi resetTransaction() và trả về thông báo.
         if (selectedItem != null && currentBalance >= selectedItem.getPrice()) {
@@ -82,6 +80,7 @@ public class VendingMachine {
         } else {
             throw new VendingMachineExceptions.NotEnoughMoneyException();
         }
+
     }
 
     /**
@@ -93,6 +92,7 @@ public class VendingMachine {
         long refund = currentBalance;
         resetTransaction();
         return "Giao dịch đã bị hủy - Hoàn lại: " + refund + " VND";
+
     }
 
     private void resetTransaction() {
