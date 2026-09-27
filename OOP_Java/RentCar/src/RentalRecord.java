@@ -35,7 +35,13 @@ public class RentalRecord {
      */
     public double calculateTotalCost() {
         // TODO: Sinh viên cần hoàn thiện mã nguồn ở đây
-        return 0; // Giá trị trả về tạm thời
+        LocalDate dayEnd;
+        if (returnDate != null) {
+            dayEnd = returnDate;
+        } else {
+            dayEnd = LocalDate.now();
+        }
+        return ChronoUnit.DAYS.between(rentalDate, dayEnd) * vehicle.getRentalRatePerDay(); // Giá trị trả về tạm thời
     }
 
     // Getters and Setters
