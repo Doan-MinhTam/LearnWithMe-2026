@@ -55,7 +55,23 @@ public class Cinema {
      */
     public Ticket bookTickets(Showtime showtime, List<String> seatNumbers) {
         // TODO: Sinh viên triển khai logic tại đây
-        return null;
+        List<Seat> bookedSeats = new ArrayList<>();
+
+        for (String seatNumber : seatNumbers) {
+            Seat seat = showtime.findSeat(seatNumber);
+
+            if (seat == null || seat.isBooked()) {
+                return null;
+            }
+
+            bookedSeats.add(seat);
+        }
+
+        for (Seat seat : bookedSeats) {
+            seat.book();
+        }
+
+        return new Ticket(showtime, bookedSeats);
     }
 
     public List<Movie> getMovies() { return movies; }

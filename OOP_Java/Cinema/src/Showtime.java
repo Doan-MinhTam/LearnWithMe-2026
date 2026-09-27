@@ -44,6 +44,11 @@ public class Showtime {
      */
     public Seat findSeat(String seatNumber) {
         // TODO: Sinh viên duyệt danh sách seats và so sánh mã ghế (không phân biệt hoa thường)
+        for (Seat seat : seats) {
+            if (seat.getSeatNumber().equalsIgnoreCase(seatNumber)) {
+                return seat;
+            }
+        }
         return null;
     }
 
