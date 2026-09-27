@@ -86,7 +86,40 @@ public class RentalAgency {
      */
     public String returnVehicle(String vehicleId) {
         // TODO: Sinh viên hoàn thiện logic
-        return "";
+        Vehicle vehicle = null;
+        for (Vehicle ve : vehicles) {
+            if (ve.getId().equals(vehicleId)) {
+                vehicle = ve;
+                break;
+            }
+        }
+        if (vehicle == null) {
+            return "Lỗi: Không tìm thấy xe với ID " + vehicleId;
+        }
+
+        RentalRecord activeRecord = null;
+        for (RentalRecord record : rentalRecords) {
+            if (record.getVehicle().getId().equals(vehicleId) && record.getReturnDate() == null) {
+                activeRecord = record;
+                break;
+            }
+        }
+        if (activeRecord == null) {
+            return "Lỗi: Không tìm thấy giao dịch thuê đang hoạt động cho xe này";
+        }
+
+        vehicle.setAvailable(true);
+        activeRecord.setReturnDate(LocalDate.now());
+        double totalCost = activeRecord.calculateTotalCost();
+
+
+        return "Thành công: Xe "
+                + vehicle.getBrand()
+                + " "
+                + vehicle.getModel()
+                + " đã được trả - Tổng chi phí: "
+                + totalCost
+                + " VND";
     }
 
     /**
@@ -95,8 +128,22 @@ public class RentalAgency {
      * Nếu không có xe nào: "Tất cả xe đã được cho thuê."
      */
     public String getAvailableVehiclesInfo() {
+        String result = "";
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.isAvailable()) {
+                result += "ID: " + vehicle.getId()
+                        + " | Hãng: " + vehicle.getBrand()
+                        + " | Model: " + vehicle.getModel()
+                        + " | Giá thuê: " + vehicle.getRentalRatePerDay()
+                        + "/ngày\n";
+            }
+        }
 
-        return "";
+        if (result.equals("")) {
+            return "Tất cả xe đã được cho thuê.";
+        }
+
+        return result;
     }
 
     public void addVehicle(Vehicle v) {
