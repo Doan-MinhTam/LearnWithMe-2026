@@ -16,7 +16,7 @@ public class QuanLyTiemChung {
 
     /**
      * [YÊU CẦU SINH VIÊN HOÀN THIỆN HÀM NÀY]
-     *
+     * <p>
      * Xử lý logic nghiệp vụ để đặt một lịch hẹn tiêm chủng.
      * Hàm cần thực hiện các bước sau:
      * 1. Tìm đối tượng NguoiDan trong `danhSachNguoiDan` dựa vào `cccd`. Nếu không tìm thấy, in ra lỗi và trả về `null`.
@@ -37,12 +37,52 @@ public class QuanLyTiemChung {
      */
     public static LichHenTiem datLichHen(String cccd, String idTrungTam, Vaccine loaiVaccine) {
         // TODO: Sinh viên viết code ở đây
-        return null; // Xóa dòng này khi hoàn thiện
+        NguoiDan nguoiDan = null;
+        for (NguoiDan nd : danhSachNguoiDan) {
+            if (nd.getCccd().equals(cccd)) {
+                nguoiDan = nd;
+                break;
+            }
+        }
+        if (nguoiDan == null) {
+            System.out.println("[LỖI] Không tìm thấy người dân có CCCD: " + cccd);
+            return null;
+        }
+
+        TrungTamTiemChung trungTamTiemChung = null;
+        for (TrungTamTiemChung trungTamTT : danhSachTrungTam) {
+            if (trungTamTT.getId().equalsIgnoreCase(idTrungTam)) {
+                trungTamTiemChung = trungTamTT;
+                break;
+            }
+        }
+        if (trungTamTiemChung == null) {
+            System.out.println("[LỖI] Không tìm thấy trung tâm có ID: " + idTrungTam);
+            return null;
+        }
+
+        int lieuLuongTiepTheo = nguoiDan.getSoMuiDaTiem() + 1;
+        if (lieuLuongTiepTheo > loaiVaccine.getSoLieuCanThiet()) {
+            System.out.println("[THÔNG BÁO] " + nguoiDan.getHoTen() + " đã tiêm đủ " + loaiVaccine.getSoLieuCanThiet()
+                    + " liều " + loaiVaccine.getTenVaccine() + ".");
+            return null;
+        }
+        if (!trungTamTiemChung.coSanVaccine(loaiVaccine)) {
+            System.out.println("[LỖI] " + trungTamTiemChung.getTenTrungTam() + " đã hết vaccine " + loaiVaccine.getTenVaccine() + ".");
+            return null;
+        }
+
+
+        LichHenTiem lichHenTiem = new LichHenTiem(nguoiDan, trungTamTiemChung, LocalDate.now(), loaiVaccine, lieuLuongTiepTheo);
+        System.out.println("[THÀNH CÔNG] Đã đặt lịch hẹn cho " + nguoiDan.getHoTen() + " tiêm mũi " + lieuLuongTiepTheo
+                + " - " + loaiVaccine.getTenVaccine() + " tại " + trungTamTiemChung.getTenTrungTam() + ".");
+
+        return lichHenTiem; // Xóa dòng này khi hoàn thiện
     }
 
     /**
      * [YÊU CẦU SINH VIÊN HOÀN THIỆN HÀM NÀY]
-     *
+     * <p>
      * Ghi nhận một mũi tiêm đã được thực hiện dựa trên lịch hẹn.
      * Hàm cần thực hiện các bước sau:
      * 1. Kiểm tra đầu vào: Nếu `lichHen` là `null` thì không làm gì cả và kết thúc hàm.
@@ -58,6 +98,20 @@ public class QuanLyTiemChung {
      */
     public static void ghiNhanTiem(LichHenTiem lichHen) {
         // TODO: Sinh viên viết code ở đây
+        if (lichHen == null) {
+            return;
+        }
+
+        NguoiDan nguoiDan = lichHen.getNguoiDan();
+        TrungTamTiemChung trungTamTiemChung = lichHen.getTrungTam();
+        Vaccine vaccine = lichHen.getLoaiVaccine();
+
+        String thongTin = "Mũi " + lichHen.getMuiSo() + " - " + vaccine.getTenVaccine()
+                + " tại " + trungTamTiemChung.getTenTrungTam();
+        nguoiDan.themMuiTiem(thongTin);
+        trungTamTiemChung.suDungVaccine(vaccine);
+        System.out.println("[GHI NHẬN] " + nguoiDan.getHoTen() + " đã tiêm thành công. Kho của "
+                + trungTamTiemChung.getTenTrungTam() + " đã được cập nhật.");
     }
 
     public static void inThongTinHeThong() {
@@ -72,7 +126,7 @@ public class QuanLyTiemChung {
         }
         System.out.println("=======================================");
     }
-    
+
     // Thêm hàm này vào lớp QuanLyTiemChung.java
     public static TrungTamTiemChung timTrungTamTheoId(String id) {
         for (TrungTamTiemChung tt : danhSachTrungTam) {
