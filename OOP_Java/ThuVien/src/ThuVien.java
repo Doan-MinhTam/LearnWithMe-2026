@@ -45,8 +45,44 @@ public class ThuVien {
         System.out.println("\n[YÊU CẦU MƯỢN] Độc giả " + idDocGia + " muốn mượn sách " + idSach);
         
         // --- SINH VIÊN VIẾT CODE TẠI ĐÂY ---
-        
-        return null; // Tạm thời trả về null
+        Sach sach = null;
+        for (Sach s : danhMucSach) {
+            if (s.getId().equals(idSach)) {
+                sach = s;
+                break;
+            }
+        }
+        if (sach==null) {
+            System.out.println("   -> [THẤT BẠI] Không tìm thấy sách với ID: " + idSach);
+            return null;
+        }
+
+        DocGia docGia = null;
+        for (DocGia dg : danhSachDocGia) {
+            if (dg.getId().equals(idDocGia)) {
+                docGia = dg;
+                break;
+            }
+        }
+        if (docGia==null) {
+            System.out.println("   -> [THẤT BẠI] Không tìm thấy độc giả với ID: " + idDocGia);
+            return null;
+        }
+
+        if (sach.getTrangThai() == TrangThaiSach.DANG_DUOC_MUON) {
+            System.out.println("   -> [THẤT BẠI] Sách '" + sach.getTieuDe() + "' hiện đang được mượn.");
+            return null;
+        }
+
+        String idPhieu = "PM" + String.format("%03d", nextLoanId++);
+        PhieuMuon phieuMuon = new PhieuMuon(idPhieu, sach, docGia, LocalDate.now(), 14);
+        sach.setTrangThai(TrangThaiSach.DANG_DUOC_MUON);
+
+        docGia.getSachDangMuon().add(phieuMuon);
+        cacPhieuMuonDangHoatDong.add(phieuMuon);
+        System.out.println("   -> [THÀNH CÔNG] Độc giả " + docGia.getTenDocGia()
+                + " đã mượn sách '" + sach.getTieuDe() + "'.");
+        return phieuMuon;
     }
 
     /**
