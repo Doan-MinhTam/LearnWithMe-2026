@@ -49,6 +49,6 @@ public class CartItem {
      */
     public double getSubtotal() {
         // TODO: Học viên hoàn thiện hàm này
-        return 0; // Xóa dòng này và viết code của bạn
+        return product.getPrice() * getQuantity(); // Xóa dòng này và viết code của bạn
     }
 }

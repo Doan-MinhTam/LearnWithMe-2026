@@ -16,7 +16,16 @@ public class ShoppingCart {
      * 2. Nếu chưa có, tạo CartItem mới và thêm vào danh sách.
      */
     public void addProduct(Product product, int quantity) {
-        // TODO: Học viên hoàn thiện hàm này
+        // TODO: Học viên hoàn thiện hàm nayf
+        for (CartItem item : items) {
+            if (product.equals(item.getProduct())) {
+                item.increaseQuantity(quantity);
+                return;
+            }
+        }
+        CartItem newItem = new CartItem(product, quantity);
+        items.add(newItem);
+
     }
 
     /**
@@ -25,7 +34,11 @@ public class ShoppingCart {
      */
     public double calculateTotal() {
         // TODO: Học viên hoàn thiện hàm này
-        return 0;
+        double totalPrice = 0.0;
+        for (CartItem item : items) {
+            totalPrice += item.getSubtotal();
+        }
+        return totalPrice;
     }
 
     /**
