@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Lớp dịch vụ trung tâm, quản lý toàn bộ hệ thống nghe nhạc.
@@ -13,14 +14,23 @@ public class DichVuAmNhac {
     private static int nextPlaylistId = 1;
 
     // Các phương thức để khởi tạo dữ liệu cho dịch vụ
-    public static void themNgheSi(NgheSi ngheSi) { danhSachNgheSi.add(ngheSi); }
-    public static void themBaiHat(BaiHat baiHat) { thuVienBaiHat.add(baiHat); }
-    public static void themNguoiDung(NguoiDung nguoiDung) { danhSachNguoiDung.add(nguoiDung); }
+    public static void themNgheSi(NgheSi ngheSi) {
+        danhSachNgheSi.add(ngheSi);
+    }
+
+    public static void themBaiHat(BaiHat baiHat) {
+        thuVienBaiHat.add(baiHat);
+    }
+
+    public static void themNguoiDung(NguoiDung nguoiDung) {
+        danhSachNguoiDung.add(nguoiDung);
+    }
 
     /**
      * Cho phép một người dùng tạo một playlist mới.
+     *
      * @param tenPlaylist Tên của playlist muốn tạo.
-     * @param nguoiDung Người dùng thực hiện hành động.
+     * @param nguoiDung   Người dùng thực hiện hành động.
      * @return Đối tượng Playlist vừa được tạo.
      */
     public static Playlist taoPlaylist(String tenPlaylist, NguoiDung nguoiDung) {
@@ -33,7 +43,8 @@ public class DichVuAmNhac {
 
     /**
      * Thêm một bài hát từ thư viện vào một playlist cụ thể.
-     * @param baiHat Bài hát cần thêm.
+     *
+     * @param baiHat   Bài hát cần thêm.
      * @param playlist Playlist đích.
      */
     public static void themBaiHatVaoPlaylist(BaiHat baiHat, Playlist playlist) {
@@ -45,6 +56,7 @@ public class DichVuAmNhac {
     /**
      * Mô phỏng việc phát một playlist.
      * In ra danh sách các bài hát và tổng thời lượng.
+     *
      * @param playlist Playlist cần phát.
      */
     public static void phatPlaylist(Playlist playlist) {
@@ -66,7 +78,7 @@ public class DichVuAmNhac {
 
     /**
      * Tìm kiếm bài hát trong thư viện theo từ khóa.
-     *
+     * <p>
      * Yêu cầu cho học sinh:
      * 1. Tạo một danh sách (List<BaiHat>) rỗng để chứa kết quả tìm kiếm.
      * 2. Chuyển đổi từ khóa tìm kiếm (`tuKhoa`) sang chữ thường để việc so sánh không phân biệt chữ hoa/thường.
@@ -82,6 +94,18 @@ public class DichVuAmNhac {
      */
     public static List<BaiHat> timKiemBaiHat(String tuKhoa) {
         // PHẦN CODE HỌC SINH CẦN HOÀN THIỆN
-        return new ArrayList<>(); // Giá trị trả về tạm thời
+        List<BaiHat> baiHats = new ArrayList<>();
+        String tuKhoaTimKiem = tuKhoa.toLowerCase();
+        String tenBaiHat = "";
+        String tenNgheSi = "";
+        for (BaiHat baiHat : thuVienBaiHat) {
+            tenBaiHat = baiHat.getNgheSi().getTenNgheSi().toLowerCase();
+            tenNgheSi = baiHat.getTenBaiHat().toLowerCase();
+            if (tenBaiHat.contains(tuKhoaTimKiem) || tenNgheSi.contains(tuKhoaTimKiem)) {
+                baiHats.add(baiHat);
+            }
+        }
+
+        return baiHats; // Giá trị trả về tạm thời
     }
 }

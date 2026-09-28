@@ -54,7 +54,11 @@ public class Playlist {
      */
     public int tinhTongThoiLuong() {
         // PHẦN CODE HỌC SINH CẦN HOÀN THIỆN
-        return 0; // Giá trị trả về tạm thời
+        int tongThoiLuong = 0;
+        for (BaiHat baiHat : danhSachBaiHat) {
+            tongThoiLuong += baiHat.getThoiLuongGiay();
+        }
+        return tongThoiLuong; // Giá trị trả về tạm thời
     }
 
     @Override
