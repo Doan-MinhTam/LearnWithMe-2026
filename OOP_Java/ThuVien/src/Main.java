@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static void khoiTaoDuLieu() {
+    public static void main(String[] args) {
+
         System.out.println("--- Đang đọc và khởi tạo dữ liệu từ file input.txt ---");
 
         // Tác giả
@@ -23,9 +24,8 @@ public class Main {
         ThuVien.dangKyDocGia(new DocGia("DG03", "Lê Thị Bình"));
 
         System.out.println("--- Dữ liệu đã sẵn sàng ---");
-    }
 
-    private static void testChoMuonSach() {
+
         System.out.println("\n--- BẮT ĐẦU TEST HÀM: choMuonSach ---");
 
         System.out.println("\n# Kịch bản 1: Mượn thành công");
@@ -44,9 +44,8 @@ public class Main {
         ThuVien.choMuonSach("S003", "DG01");
 
         System.out.println("\n--- KẾT THÚC TEST HÀM: choMuonSach ---");
-    }
 
-    private static void testNhanTraSach() {
+
         System.out.println("\n--- BẮT ĐẦU TEST HÀM: nhanTraSach ---");
     }
 }

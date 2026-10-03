@@ -101,7 +101,22 @@ public class ThuVien {
      */
     public static void nhanTraSach(PhieuMuon phieu) {
         // --- SINH VIÊN VIẾT CODE TẠI ĐÂY ---
-        
+        if (phieu==null) {
+            System.out.println("\n[NHẬN TRẢ] Phiếu mượn không hợp lệ (null). Bỏ qua.");
+            return;
+        }
+
+        DocGia docGia = phieu.getDocGia();
+        Sach sach = phieu.getSach();
+        sach.setTrangThai(TrangThaiSach.CO_SAN);
+        docGia.xoaPhieuMuon(phieu);
+        cacPhieuMuonDangHoatDong.remove(phieu);
+        System.out.println("\n[NHẬN TRẢ] Độc giả " + docGia.getTenDocGia() + " trả sách '" + sach.getTieuDe() + "'.");
+        System.out.println("   -> [THÀNH CÔNG] Đã cập nhật trạng thái sách và độc giả.");
+
+        if (phieu.isQuaHan()) {
+            System.out.println("   -> [CẢNH BÁO] Sách được trả quá hạn (hạn trả: " + phieu.getNgayTraDuKien() + ").");
+        }
     }
 
     /**
@@ -117,6 +132,17 @@ public class ThuVien {
      */
     public static void lietKeSachQuaHan() {
         // --- SINH VIÊN VIẾT CODE TẠI ĐÂY ---
-        
+        System.out.println("\n--- Báo cáo sách mượn quá hạn ---");
+        boolean coQuaHan = false;
+        for (PhieuMuon phieu : cacPhieuMuonDangHoatDong) {
+            if (phieu.isQuaHan()) {
+                System.out.println("   - " + phieu);
+                coQuaHan = true;
+            }
+        }
+        if (!coQuaHan) {
+            System.out.println("=> Không có sách nào bị mượn quá hạn tại thời điểm hiện tại.");
+        }
+        System.out.println("--- Kết thúc báo cáo ---\n");
     }
 }
