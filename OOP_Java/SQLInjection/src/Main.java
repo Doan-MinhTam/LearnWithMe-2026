@@ -22,7 +22,13 @@ public class Main {
      */
     public static List<User> vulnerableLogin(String username, String password) {
         // TODO: Hoàn thiện code ở đây
-        return null; // Xóa dòng này sau khi hoàn thiện
+        String query = "SELECT * FROM users WHERE username = '"
+                + username
+                + "' AND password = '"
+                + password
+                + "'";
+
+        return SimulatedDatabase.executeVulnerableQuery(query);
 }
 
     /**

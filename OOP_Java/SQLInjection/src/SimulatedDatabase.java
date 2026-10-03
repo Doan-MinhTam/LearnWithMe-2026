@@ -24,6 +24,7 @@ public class SimulatedDatabase {
     /**
      * [NGUY HIỂM] Thực thi một truy vấn được tạo bằng cách ghép chuỗi.
      * Phương thức này mô phỏng cách một DB engine bị "lừa" bởi chuỗi truy vấn độc hại.
+     *
      * @param rawQuery Chuỗi truy vấn SQL thô, được tạo từ việc ghép nối input của người dùng.
      * @return Danh sách người dùng khớp với truy vấn.
      */
@@ -61,7 +62,7 @@ public class SimulatedDatabase {
      * [AN TOÀN] Thực thi truy vấn bằng cách sử dụng tham số riêng biệt.
      * Phương thức này mô phỏng cách Prepared Statements hoạt động: câu lệnh và dữ liệu
      * được xử lý riêng biệt, ngăn chặn input của người dùng thay đổi logic của câu lệnh.
-     *
+     * <p>
      * YÊU CẦU DÀNH CHO HỌC SINH:
      * 1. KHÔNG được nối chuỗi `queryTemplate` với các tham số `params`.
      * Hãy coi các giá trị trong `params` là dữ liệu thuần túy để so sánh.
@@ -74,14 +75,21 @@ public class SimulatedDatabase {
      * 7. Trả về danh sách `results`.
      *
      * @param queryTemplate Câu lệnh SQL với các placeholder '?'.
-     * @param params Các giá trị tham số để điền vào placeholder.
+     * @param params        Các giá trị tham số để điền vào placeholder.
      * @return Danh sách người dùng khớp với truy vấn.
      */
     public static List<User> executeSecureQuery(String queryTemplate, String... params) {
         System.out.println("   [DB Engine - SECURE] Executing template: " + queryTemplate);
         System.out.println("   [DB Engine - SECURE] With params: [" + params[0] + ", " + params[1] + "]");
-        
         // TODO: Hoàn thiện code ở đây
-        return new ArrayList<>(); // Xóa dòng này sau khi hoàn thiện
+        String tenNguoiDung = params[0];
+        String passWord = params[1];
+        ArrayList<User> results = new ArrayList<>();
+        for (User user : userTable) {
+            if (user.getUsername().equalsIgnoreCase(tenNguoiDung) && user.getPassword().equalsIgnoreCase(passWord)) {
+                results.add(user);
+            }
+        }
+        return results; // Xóa dòng này sau khi hoàn thiện
     }
 }
