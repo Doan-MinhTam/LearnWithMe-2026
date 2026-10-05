@@ -26,6 +26,12 @@ public class CheckingAccount extends BankAccount {
     @Override
     public boolean rutTien(double soTien) {
         // TODO: Học sinh cần hoàn thiện code ở đây
+        if (soTien > 0 && soTien <= (soDu + hanMucThauChi)) {
+            this.soDu -= soTien;
+            System.out.printf("Rút tiền thành công từ TK %s. Số dư mới: %,.0f", soTaiKhoan, soDu);
+            return true;
+        }
+        System.out.printf("Rút tiền thất bại từ TK %s. Vượt quá hạn mức thấu chi hoặc số tiền không hợp lệ.", soTaiKhoan);
         return false;
     }
 
@@ -37,5 +43,6 @@ public class CheckingAccount extends BankAccount {
     @Override
     public void tinhLaiHangThang() {
         // TODO: Học sinh cần hoàn thiện code ở đây
+        System.out.printf("TK %s là tài khoản vãng lai, không có lãi suất.", soTaiKhoan);
     }
 }

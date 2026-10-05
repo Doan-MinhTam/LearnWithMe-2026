@@ -25,7 +25,13 @@ public class SavingsAccount extends BankAccount {
     @Override
     public boolean rutTien(double soTien) {
         // TODO: Học sinh cần hoàn thiện code ở đây
-        return true;
+        if (soTien > 0 && soTien <=soDu) {
+            this.soDu -= soTien;
+            System.out.printf("Rút tiền thành công từ TK " +soTaiKhoan + ". Số dư mới: %,.0f\n", soDu);
+            return true;
+        }
+        System.out.printf("Rút tiền thất bại từ TK %s. Số dư không đủ hoặc số tiền không hợp lệ.\n", soTaiKhoan);
+        return false;
     }
 
     /**
@@ -38,5 +44,8 @@ public class SavingsAccount extends BankAccount {
     @Override
     public void tinhLaiHangThang() {
         // TODO: Học sinh cần hoàn thiện code ở đây
+        double tienLai = this.soDu * this.laiSuat;
+        soDu += tienLai;
+        System.out.printf("Đã cộng lãi cho TK %s. Tiền lãi: %,.0f. Số dư mới: %,.0f",soTaiKhoan, tienLai, soDu);
     }
 }
