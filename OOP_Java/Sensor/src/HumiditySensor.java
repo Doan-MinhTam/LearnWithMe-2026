@@ -37,6 +37,16 @@ public class HumiditySensor extends WeatherSensor {
     @Override
     public String generateReport() {
         // VIẾT MÃ CỦA BẠN VÀO ĐÂY
-        return ""; // Xóa dòng này đi
+        String description;
+
+        if (humidity < 30) {
+            description = "Khô";
+        } else if (humidity <= 60) {
+            description = "Lý tưởng";
+        } else {
+            description = "Ẩm ướt";
+        }
+
+        return String.format("Độ ẩm: %.1f%% (%s)", humidity, description);
     }
 }

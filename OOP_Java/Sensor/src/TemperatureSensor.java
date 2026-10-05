@@ -31,7 +31,7 @@ public class TemperatureSensor extends WeatherSensor {
      */
     private double getFahrenheit() {
         // VIẾT MÃ CỦA BẠN VÀO ĐÂY
-        return 0; // Xóa dòng này đi
+        return (celsius * 9 / 5) + 32; // Xóa dòng này đi
     }
 
     /**
@@ -50,6 +50,20 @@ public class TemperatureSensor extends WeatherSensor {
     @Override
     public String generateReport() {
         // VIẾT MÃ CỦA BẠN VÀO ĐÂY
-        return ""; // Xóa dòng này đi
+        double fahrenheit = getFahrenheit();
+
+        String report = String.format(
+                "Nhiệt độ: %.1f°C (%.1f°F)",
+                celsius,
+                fahrenheit
+        );
+
+        if (celsius > 38.0) {
+            report += " - CẢNH BÁO: Nhiệt độ rất cao!";
+        } else if (celsius < 5.0) {
+            report += " - CẢNH BÁO: Nhiệt độ rất thấp!";
+        }
+
+        return report;
     }
 }

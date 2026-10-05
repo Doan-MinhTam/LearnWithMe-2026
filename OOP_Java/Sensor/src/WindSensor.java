@@ -42,8 +42,23 @@ public class WindSensor extends WeatherSensor {
      * @return Mô tả sức gió.
      */
     private String getBeaufortDescription() {
+
         // VIẾT MÃ CỦA BẠN VÀO ĐÂY
-        return ""; // Xóa dòng này đi
+        if (speedKmh < 1) {
+            return "Lặng gió";
+        } else if (speedKmh <= 5) {
+            return "Gió nhẹ";
+        } else if (speedKmh <= 19) {
+            return "Gió yếu";
+        } else if (speedKmh <= 38) {
+            return "Gió vừa";
+        } else if (speedKmh <= 61) {
+            return "Gió khá mạnh";
+        } else if (speedKmh <= 88) {
+            return "Gió mạnh";
+        } else {
+            return "Bão";
+        }
     }
 
     /**
