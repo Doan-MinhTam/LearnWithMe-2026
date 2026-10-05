@@ -44,6 +44,11 @@ public class PassengerPlane extends Airplane {
     @Override
     public double tinhChiPhiHoatDong(double quangDuong) {
         // Sinh viên cần viết code ở đây
+        if (quangDuong > tamBay) {
+            System.out.println("CẢNH BÁO: Chuyến bay vượt tầm bay tối đa của " + maHieu);
+            return 0;
+        }
+        return (CHI_PHI_NHIEN_LIEU_MOI_KM * quangDuong) + (CHI_PHI_PHUC_VU_MOI_HANH_KHACH * soGhe);
     }
 
     /**
@@ -57,5 +62,6 @@ public class PassengerPlane extends Airplane {
     @Override
     public void thucHienKiemTraAnNinh() {
         // Sinh viên cần viết code ở đây
+        System.out.println("Máy bay "+ maHieu+": Đang thực hiện kiểm tra an ninh hành khách và soi chiếu hành lý.");
     }
 }
