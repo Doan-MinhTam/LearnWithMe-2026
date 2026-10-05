@@ -34,7 +34,7 @@ public class HinhChuNhat extends HinhHoc2D {
          * Ví dụ: chieuDai = Math.abs(x2 - x1).
          */
         // Xóa dòng này và viết code của bạn
-        return 0.0;
+        return 2 * (Math.abs(x2-x1) + Math.abs(y2-y1));
     }
     
     @Override
@@ -65,7 +65,23 @@ public class HinhChuNhat extends HinhHoc2D {
          * 5. Cập nhật lại tọa độ mới cho các thuộc tính x1, y1, x2, y2 của lớp.
          */
         // Viết code của bạn ở đây
+        double tamX = (x1 + x2) / 2;
+        double tamY = (y1 + y2) / 2;
+        double gocRad = Math.toRadians(goc);
+        double cosGoc = Math.cos(gocRad);
+        double sinGoc = Math.sin(gocRad);
+
+        double newX1 = tamX + (x1 - tamX) * cosGoc - (y1 - tamY) * sinGoc;
+        double newY1 = tamY + (x1 - tamX) * sinGoc + (y1 - tamY) * cosGoc;
+
+        double newX2 = tamX + (x2 - tamX) * cosGoc - (y2 - tamY) * sinGoc;
+        double newY2 = tamY + (x2 - tamX) * sinGoc + (y2 - tamY) * cosGoc;
+        x1 = newX1;
+        y1 = newY1;
+        x2 = newX2;
+        y2 = newY2;
     }
+
 
     @Override
     public double tinhDienTich() {

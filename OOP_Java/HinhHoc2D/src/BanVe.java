@@ -41,21 +41,25 @@ public class BanVe {
     }
 
     public void tinhTongDienTich() {
-    /**
-     * YÊU CẦU: Hoàn thiện phương thức này để tính tổng diện tích của TẤT CẢ
-     * các hình có trong `danhSachHinh`.
-     *
-     * Gợi ý:
-     * - Khởi tạo một biến `tongDienTich` bằng 0.
-     * - Sử dụng vòng lặp (ví dụ: for-each) để duyệt qua từng đối tượng `HinhHoc2D`
-     * trong `danhSachHinh`.
-     * - Trong vòng lặp, gọi phương thức `tinhDienTich()` của mỗi hình và
-     * cộng dồn kết quả vào biến `tongDienTich`.
-     * - Cuối cùng, in kết quả ra màn hình theo định dạng đã cho.
-     */
-    double tongDienTich = 0;
-    // Viết code của bạn ở đây
+        /**
+         * YÊU CẦU: Hoàn thiện phương thức này để tính tổng diện tích của TẤT CẢ
+         * các hình có trong `danhSachHinh`.
+         *
+         * Gợi ý:
+         * - Khởi tạo một biến `tongDienTich` bằng 0.
+         * - Sử dụng vòng lặp (ví dụ: for-each) để duyệt qua từng đối tượng `HinhHoc2D`
+         * trong `danhSachHinh`.
+         * - Trong vòng lặp, gọi phương thức `tinhDienTich()` của mỗi hình và
+         * cộng dồn kết quả vào biến `tongDienTich`.
+         * - Cuối cùng, in kết quả ra màn hình theo định dạng đã cho.
+         */
+        double tongDienTich = 0;
+        // Viết code của bạn ở đây
+        for (HinhHoc2D hinHoc : danhSachHinh) {
+            tongDienTich += hinHoc.tinhDienTich();
+        }
 
-    System.out.printf("Tổng diện tích của tất cả các hình: %.2f\n", tongDienTich);
-}
+
+        System.out.printf("Tổng diện tích của tất cả các hình: %.2f\n", tongDienTich);
+    }
 }

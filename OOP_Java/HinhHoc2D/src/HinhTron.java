@@ -38,7 +38,8 @@ public class HinhTron extends HinhHoc2D {
          * - Biến `banKinh` đã được khai báo trong lớp.
          */
         // Xóa dòng này và viết code của bạn
-        return 0.0;
+
+        return Math.PI * Math.pow(banKinh,2);
     }
 
     @Override
