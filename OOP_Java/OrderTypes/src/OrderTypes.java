@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 abstract class Order {
     public String orderId;
     public String symbol;
@@ -21,8 +17,7 @@ abstract class Order {
 class LimitOrder extends Order {
     public double limitPrice;
 
-    public LimitOrder(String orderId, String symbol,
-                      int quantity, double limitPrice) {
+    public LimitOrder(String orderId, String symbol, int quantity, double limitPrice) {
         super(orderId, symbol, quantity);
         this.limitPrice = limitPrice;
     }
