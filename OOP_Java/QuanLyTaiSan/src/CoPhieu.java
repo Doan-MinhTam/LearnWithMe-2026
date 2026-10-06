@@ -27,5 +27,8 @@ public class CoPhieu extends TaiSan {
          * Giá trị mới = Giá trị cũ * (1 + tỉ lệ thay đổi thực tế).
          */
         // VIẾT CODE CỦA BẠN VÀO ĐÂY
+        double bienDongCoSo = random.nextDouble(-1.0,1.1);
+        double tiLeThayDoiThucTe = bienDongCoSo * this.mucDoRuiRo;
+        this.giaTriHienTai = giaTriHienTai * (1 + tiLeThayDoiThucTe);
     }
 }

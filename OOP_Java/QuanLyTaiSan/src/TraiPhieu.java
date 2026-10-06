@@ -24,5 +24,6 @@ public class TraiPhieu extends TaiSan {
          * - Cập nhật lại giá trị cho 'this.giaTriHienTai'.
          */
         // VIẾT CODE CỦA BẠN VÀO ĐÂY
+        giaTriHienTai = giaTriHienTai * (1 + laiSuatHangNam);
     }
 }

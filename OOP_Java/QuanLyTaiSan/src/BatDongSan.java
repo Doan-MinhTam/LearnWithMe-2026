@@ -26,5 +26,7 @@ public class BatDongSan extends TaiSan {
          * 3. Gán kết quả cuối cùng cho 'this.giaTriHienTai'.
          */
         // VIẾT CODE CỦA BẠN VÀO ĐÂY
+        giaTriHienTai = giaTriHienTai *  (1+tiLeTangGiaHangNam);
+        giaTriHienTai = giaTriHienTai + thuNhapThueHangNam;
     }
 }
