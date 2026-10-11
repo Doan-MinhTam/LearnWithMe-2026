@@ -1,13 +1,16 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
-
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
-    }
-}
+/**
+ * Bài tập 2: Order Types - Lệnh giới hạn và Lệnh thị trường
+ * 1. Yêu cầu nghiệp vụ
+ * Phân biệt hai loại lệnh cơ bản trong giao dịch.
+ *
+ * A. Lớp Order (Cha)
+ * Thuộc tính: orderId, symbol, quantity.
+ * Phương thức trừu tượng: double getExecutionPrice(double currentMarketPrice).
+ * B. Lớp LimitOrder (Con)
+ * Thuộc tính riêng: limitPrice (Mức giá mong muốn).
+ * Logic: getExecutionPrice trả về limitPrice. (Lệnh chỉ khớp ở giá đã đặt).
+ * C. Lớp MarketOrder (Con)
+ * Logic: getExecutionPrice trả về currentMarketPrice. (Lệnh khớp ngay lập tức theo giá thị trường).
+ * 2. Lớp JAVA_OOP_302.java
+ * Mô phỏng việc khớp lệnh: Nhập một giá thị trường hiện tại, sau đó kiểm tra danh sách lệnh để xem mỗi lệnh sẽ được thực thi ở mức giá nào.
+ */
