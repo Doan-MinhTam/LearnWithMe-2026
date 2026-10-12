@@ -12,22 +12,30 @@ public class SongManager {
 
     public static SongManager getInstance() {
         /* TODO */
+        if (instance == null) {
+            instance = new SongManager();
+        }
+        return instance;
     }
 
     public void append(Song song) {
         /* TODO */
+        songList.add(song);
     }
 
     public int size() {
         /* TODO */
+        return songList.size();
     }
 
     public Song songAt(int index) {
         /* TODO */
+        return songList.get(index);
     }
 
     public void remove(Song song) {
         /* TODO */
+        songList.remove(song);
     }
 
     public List<Song> getSongList() {
@@ -41,17 +49,85 @@ public class SongManager {
         return result;
     }
 
-    public List<Song> sortDurationDecreasing() { /* TODO */ }
-    public List<Song> sortReleaseYearIncreasing() { /* TODO */ }
-    public List<Song> sortReleaseYearDecreasing() { /* TODO */ }
-    public List<Song> sortSongsByTitle() { /* TODO */ }
+    public List<Song> sortDurationDecreasing() {
+        /* TODO */
+        ArrayList<Song> songs = new ArrayList<>(songList);
+        songs.sort(Comparator.comparing(Song::getDurationSec).reversed());
+        return songs;
 
-    public List<Song> filterSongsLongerThan(int seconds) { /* TODO */ }
-    public List<Song> filterSongsByGenre(String genre) { /* TODO */ }
-    public List<Song> filterSongsByArtist(String artist) { /* TODO */ }
+    }
+    public List<Song> sortReleaseYearIncreasing() {
+        /* TODO */
+        ArrayList<Song> songs = new ArrayList<>(songList);
+        songs.sort(Comparator.comparing(Song::getReleaseYear));
+        return songs;
+
+    }
+    public List<Song> sortReleaseYearDecreasing() {
+        /* TODO */
+        ArrayList<Song> songs = new ArrayList<>(songList);
+        songs.sort(Comparator.comparing(Song::getReleaseYear).reversed());
+        return songs;
+    }
+    public List<Song> sortSongsByTitle() {
+        /* TODO */
+        ArrayList<Song> songs = new ArrayList<>(songList);
+        songs.sort(Comparator.comparing(Song::getTitle));
+        return songs;
+    }
+
+    public List<Song> filterSongsLongerThan(int seconds) {
+        /* TODO */
+        ArrayList<Song> songs = new ArrayList<>();
+        for (Song song : songList){
+            if (song.getDurationSec() > seconds) {
+                songs.add(song);
+            }
+        }
+        return songs;
+
+    }
+    public List<Song> filterSongsByGenre(String genre) {
+        /* TODO */
+        ArrayList<Song> songs = new ArrayList<>();
+        for (Song song : songList){
+            if (song.getGenre().equalsIgnoreCase(genre)) {
+                songs.add(song);
+            }
+        }
+        return songs;
+    }
+    public List<Song> filterSongsByArtist(String artist) {
+        /* TODO */
+        ArrayList<Song> songs = new ArrayList<>();
+        for (Song song : songList){
+            if (song.getArtist().equalsIgnoreCase(artist)) {
+                songs.add(song);
+            }
+        }
+        return songs;
+    }
 
     // trả về dạng "[title1, title2, title3]"
-    public String idOfSongsToString(List<Song> list) { /* TODO */ }
+    public String idOfSongsToString(List<Song> list) {
+        /* TODO */
+        int count = 0;
+        StringBuilder stringBuilder = new StringBuilder("[");
+        for (Song song : list) {
+            if (count == list.size() - 1) {
+                stringBuilder.append(song.getTitle()).append("]");
+                break;
+            }
+            stringBuilder.append(song.getTitle()).append(", ");
+            count++;
+        }
+        return stringBuilder.toString();
+    }
 
-    public void print(List<Song> list) { /* TODO */ }
+    public void print(List<Song> list) {
+        /* TODO */
+        for (Song song : list) {
+            System.out.println(song.toString());
+        }
+    }
 }

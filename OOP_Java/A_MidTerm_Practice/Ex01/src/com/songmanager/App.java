@@ -17,21 +17,63 @@ public class App {
     };
 
     // tách mỗi dòng của RAW_DATA bằng dấu phẩy, tạo Song, add vào SongManager.getInstance()
-    public static void init() { /* TODO */ }
+    public static void init() {
+        /* TODO */
+        for (String trimData : RAW_DATA) {
+            String[] parts = trimData.split(",");
+
+            String title = parts[0];
+            String artist = parts[1];
+            String genre = parts[2];
+            int durationSec = Integer.parseInt(parts[3]);
+            int releaseYear = Integer.parseInt(parts[4]);
+
+            Song song = new Song(title, artist, genre, durationSec, releaseYear);
+            SongManager.getInstance().append(song);
+        }
+
+    }
 
     public static void testOriginalData() {
         System.out.println("=== Danh sách gốc ===");
         SongManager.getInstance().print(SongManager.getInstance().getSongList());
     }
 
-    public static void testSortDurationIncreasing() { /* TODO */ }
-    public static void testSortDurationDecreasing() { /* TODO */ }
-    public static void testSortReleaseYearIncreasing() { /* TODO */ }
-    public static void testSortReleaseYearDecreasing() { /* TODO */ }
-    public static void testSortSongsByTitle() { /* TODO */ }
-    public static void testFilterSongsLongerThan180() { /* TODO — gọi filterSongsLongerThan(180) */ }
-    public static void testFilterSongsByGenrePop() { /* TODO */ }
-    public static void testFilterSongsByArtistEdSheeran() { /* TODO */ }
+    public static void testSortDurationIncreasing() {
+        /* TODO */
+        System.out.println("=== Test hàm sortDurationIncreasing ===");
+        SongManager.getInstance().print(SongManager.getInstance().sortDurationIncreasing());
+    }
+    public static void testSortDurationDecreasing() {
+        /* TODO */
+        System.out.println("=== Test hàm sortDurationDecreasing ===");
+        SongManager.getInstance().print(SongManager.getInstance().sortDurationDecreasing());
+    }
+    public static void testSortReleaseYearIncreasing() {
+        /* TODO */
+        System.out.println("=== Test hàm sortReleaseYearIncreasing ===");
+        SongManager.getInstance().print(SongManager.getInstance().sortReleaseYearIncreasing());
+    }
+    public static void testSortReleaseYearDecreasing() { /* TODO */
+        System.out.println("=== Test hàm sortReleaseYearDecreasing ===");
+        SongManager.getInstance().print(SongManager.getInstance().sortReleaseYearDecreasing());
+    }
+    public static void testSortSongsByTitle() { /* TODO */
+        System.out.println("=== Test hàm sortSongsByTitle ===");
+        SongManager.getInstance().print(SongManager.getInstance().sortSongsByTitle());
+    }
+    public static void testFilterSongsLongerThan180() { /* TODO — gọi filterSongsLongerThan(180) */
+        System.out.println("=== Test hàm filterSongsLongerThan ===");
+        SongManager.getInstance().print(SongManager.getInstance().filterSongsLongerThan(180));
+    }
+    public static void testFilterSongsByGenrePop() { /* TODO */
+        System.out.println("=== Test hàm filterSongsByGenre ===");
+        SongManager.getInstance().print(SongManager.getInstance().filterSongsByGenre("Pop"));
+    }
+    public static void testFilterSongsByArtistEdSheeran() { /* TODO */
+        System.out.println("=== Test hàm filterSongsByArtist ===");
+        SongManager.getInstance().print(SongManager.getInstance().filterSongsByArtist("Ed Sheeran"));
+    }
 
     public static void main(String[] args) {
         init();
