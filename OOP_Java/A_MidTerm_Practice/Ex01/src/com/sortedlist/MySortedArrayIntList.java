@@ -42,7 +42,7 @@ public class MySortedArrayIntList extends MyAbstractSortedIntList {
                 right = mid - 1;
             }
         }
-        return -1;
+        return -(left)-1; //Yeu cau de tra ve vi tri value can chen vao
     }
     @Override public boolean contains(int value) { /* TODO */
         return binarySearch(value) >= 0;
