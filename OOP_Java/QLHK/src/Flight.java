@@ -1,3 +1,5 @@
+import javax.swing.plaf.synth.SynthRadioButtonMenuItemUI;
+
 /**
  * CLASS 1: Flight - Đại diện cho một chuyến bay
  * 
@@ -99,6 +101,47 @@ public class Flight implements Reservable, Displayable, Validatable {
         this.firstClassPrice = firstClassPrice;
         this.status = "SCHEDULED";
     }
-    
-    
+
+    @Override
+    public String getDisplayInfo() {
+        return "Flight "+flightNumber+" | "+airline+" | "+origin+" -> "+destination+" | Departure: "+departureTime+" | Arrival: "+arrivalTime+" | Status: "+status+" | Economy: "+economyAvailable+"/"+economySeats+" | Business: "+businessAvailable+"/"+businessSeats+" | First: "+firstClassAvailable+"/"+firstClassSeats;
+
+    }
+
+    @Override
+    public boolean reserve(String seatClass, int numberOfSeats) throws NoSeatsAvailableException {
+        if (!status.equals("SCHEDULED") && !status.equals("BOARDING")) return false;
+        if (numberOfSeats <= 0) return false;
+        if (!(seatClass.equals("ECONOMY") || seatClass.equals("BUSINESS") || seatClass.equals("FIRST_CLASS"))) return false;
+        if (getAvailableSeats(seatClass) < numberOfSeats) {
+            throw new NoSeatsAvailableException("Not enough " + seatClass + " seats on flight " + flightNumber);
+        }
+        switch (seatClass) {
+            case "ECONOMY":
+                economyAvailable -= numberOfSeats;
+                break;
+            case "BUSINESS":
+                businessAvailable -= numberOfSeats;
+                break;
+            default:
+                firstClassAvailable -= numberOfSeats;
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void cancelReservation(String seatClass, int numberOfSeats) {
+
+    }
+
+    @Override
+    public int getAvailableSeats(String seatClass) {
+        return 0;
+    }
+
+    @Override
+    public boolean isValid() {
+        return false;
+    }
 }
