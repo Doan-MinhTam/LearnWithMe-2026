@@ -86,6 +86,14 @@ public class Booking implements Displayable, Validatable, Priceable {
         this.status = "CONFIRMED";
         this.seatNumbers = "";
     }
-    
-    
+
+    @Override
+    public String getDisplayInfo() {
+        return "Booking " + bookingId + " | Passenger: " + passengerName
+                + " | Flight: " + flight.getFlightNumber() + " | Class: " + seatClass
+                + " | Seats: " + numberOfSeats + " | Price: " + totalPrice + " VND"
+                + " | Status: " + status + " | Booking Date: " + bookingDate;
+    }
+
+
 }
