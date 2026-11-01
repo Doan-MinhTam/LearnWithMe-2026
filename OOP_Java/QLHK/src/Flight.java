@@ -111,12 +111,19 @@ public class Flight implements Reservable, Displayable, Validatable {
 
     @Override
     public boolean reserve(String seatClass, int numberOfSeats) throws NoSeatsAvailableException {
-        if (!status.equals("SCHEDULED") && !status.equals("BOARDING")) return false;
-        if (numberOfSeats <= 0) return false;
-        if (!(seatClass.equals("ECONOMY") || seatClass.equals("BUSINESS") || seatClass.equals("FIRST_CLASS")))
-            return false;
+        if (!status.equals("SCHEDULED") && !status.equals("BOARDING")) {
+            throw new NoSeatsAvailableException("Cannot reserve seats for flight with status: " + status);
+        }
+        if (numberOfSeats <= 0) {
+            throw new NoSeatsAvailableException("Number of seats must be positive");
+        }
         if (getAvailableSeats(seatClass) < numberOfSeats) {
-            throw new NoSeatsAvailableException("Not enough " + seatClass + " seats on flight " + flightNumber);
+            throw new NoSeatsAvailableException("Invalid seat class: " + seatClass);
+        }
+        int available = getAvailableSeats(seatClass);
+        if (available < numberOfSeats) {
+            throw new NoSeatsAvailableException("Not enough " + seatClass.toLowerCase().replace('_', ' ')
+                    + " seats. Available: " + available);
         }
         switch (seatClass) {
             case "ECONOMY":

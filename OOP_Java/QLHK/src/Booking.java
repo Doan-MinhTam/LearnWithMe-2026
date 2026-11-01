@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * CLASS 2: Booking - Đại diện cho một đặt vé
  * 
@@ -95,5 +97,68 @@ public class Booking implements Displayable, Validatable, Priceable {
                 + " | Status: " + status + " | Booking Date: " + bookingDate;
     }
 
+    @Override
+    public boolean isValid() {
+        return bookingId != null && bookingId.matches("BK\\d{8}")
+                && passengerName != null && !passengerName.trim().isEmpty()
+                && passportNumber != null && passportNumber.length() >= 6 && passportNumber.length() <= 12
+                && email != null && email.contains("@")
+                && phoneNumber != null && phoneNumber.matches("\\d{10,11}")
+                && flight != null && flight.isValid()
+                && seatClass != null && (seatClass.equals("ECONOMY") || seatClass.equals("BUSINESS")
+                || seatClass.equals("FIRST_CLASS"))
+                && numberOfSeats > 0
+                && totalPrice > 0
+                && status != null && (status.equals("CONFIRMED") || status.equals("CANCELLED")
+                || status.equals("CHECKED_IN"));
+    }
 
+    @Override
+    public double calculatePrice() {
+        return flight.getPrice(seatClass) * numberOfSeats;
+    }
+
+    public void cancel() throws InvalidBookingException {
+        if (!Objects.equals(status, "CONFIRMED")) {
+            throw new InvalidBookingException("Booking " + bookingId + " cannot be cancelled");
+        }
+        if (flight.getStatus().equals("DEPARTED") || flight.getStatus().equals("ARRIVED")) {
+            throw new InvalidBookingException("Flight " + flight.getFlightNumber() + " has already departed");
+        }
+        flight.cancelReservation(seatClass, numberOfSeats);
+        status = "CANCELLED";
+    }
+
+    public void checkIn(String seatNumbers) throws FlightDepartedException {
+        if (!status.equals("CONFIRMED")) {
+            throw new FlightDepartedException("Cannot check-in booking with status: " + status);
+        }
+        if (!flight.getStatus().equals("BOARDING")) {
+            throw new FlightDepartedException("Flight " + flight.getFlightNumber() + " is not boarding");
+        }
+        this.seatNumbers = seatNumbers;
+        status = "CHECKED_IN";
+    }
+
+    public String getFlightDetails() {
+        return flight.getDisplayInfo();
+    }
+
+    public String getBookingId() { return bookingId; }
+    public String getPassengerName() { return passengerName; }
+    public String getPassportNumber() { return passportNumber; }
+    public String getEmail() { return email; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public Flight getFlight() { return flight; }
+    public String getSeatClass() { return seatClass; }
+    public int getNumberOfSeats() { return numberOfSeats; }
+    public double getTotalPrice() { return totalPrice; }
+    public String getBookingDate() { return bookingDate; }
+    public String getStatus() { return status; }
+    public String getSeatNumbers() { return seatNumbers; }
+
+    @Override
+    public String toString() {
+        return getDisplayInfo();
+    }
 }
