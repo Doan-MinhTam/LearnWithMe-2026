@@ -1,14 +1,14 @@
 /**
  * Class DatabaseConnection (SINGLETON - THREAD SAFE)
  * Mô tả: Quản lý kết nối database duy nhất trong ứng dụng
- * 
+ *
  * Thuộc tính:
  * - instance: DatabaseConnection (static volatile) - Instance duy nhất
  * - host: String - Địa chỉ host của database
  * - port: int - Cổng kết nối
  * - databaseName: String - Tên database
  * - isConnected: boolean - Trạng thái kết nối
- * 
+ *
  * Yêu cầu:
  * 1. Áp dụng Singleton Pattern với Double-Checked Locking (thread-safe)
  * 2. Constructor private nhận vào host, port, databaseName
@@ -34,7 +34,7 @@ public class DatabaseConnection {
     private int port;
     private String databaseName;
     private boolean isConnected;
-    
+
     private DatabaseConnection(String host, int port, String databaseName) {
         this.host = host;
         this.port = port;
@@ -42,9 +42,50 @@ public class DatabaseConnection {
         this.isConnected = false;
         System.out.println("Đang thiết lập kết nối database...");
     }
-    
-    
-    
+
+    public static DatabaseConnection getInstance(String host, int port, String databaseName) {
+        if (instance == null) {
+            synchronized (DatabaseConnection.class) {
+                if (instance == null) {
+                    instance = new DatabaseConnection(host, port, databaseName);
+                    System.out.println("Tạo kết nối mới đến database: " + databaseName);
+                    return instance;
+                }
+            }
+        }
+        System.out.println("Sử dụng kết nối hiện tại đến: " + instance.databaseName);
+        return instance;
+    }
+
+    public void connect() {
+        if (!isConnected) {
+            isConnected = true;
+            System.out.println("Kết nối thành công đến " + host + ":" + port + "/" + databaseName);
+        } else {
+            System.out.println("Database đã được kết nối rồi!");
+        }
+    }
+
+    public void disconnect() {
+        if (isConnected) {
+            isConnected = false;
+            System.out.println("Đã ngắt kết nối database");
+        } else {
+            System.out.println("Database chưa được kết nối!");
+        }
+    }
+
+    public String getConnectionInfo() {
+        return "Connection Info: " + host + ":" + port + "/" + databaseName
+                + " [" + (isConnected ? "connected" : "disconnected") + "]";
+    }
+
+    @Override
+    public String toString() {
+        return "DatabaseConnection[host=" + host + ", port=" + port + ", database=" + databaseName
+                + ", connected=" + isConnected + "]";
+    }
+
     // Reset method for testing purposes
     public static void resetInstance() {
         instance = null;
