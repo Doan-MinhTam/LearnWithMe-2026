@@ -25,13 +25,68 @@ public class CreditCardPayment implements PaymentStrategy {
     private String cardHolderName;
     private String cvv;
     private String expiryDate;
-    
+
     public CreditCardPayment(String cardNumber, String cardHolderName, String cvv, String expiryDate) {
         this.cardNumber = cardNumber;
         this.cardHolderName = cardHolderName;
         this.cvv = cvv;
         this.expiryDate = expiryDate;
     }
-    
-    
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getCardHolderName() {
+        return cardHolderName;
+    }
+
+    public void setCardHolderName(String cardHolderName) {
+        this.cardHolderName = cardHolderName;
+    }
+
+    public String getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    @Override
+    public boolean pay(double amount) {
+        if (!cardNumber.matches("[0-9]{16}")) {
+            System.out.println("Thông tin thẻ không hợp lệ!");
+            return false;
+        }
+        if (!cvv.matches("[0-9]{3}")) {
+            System.out.println("Thông tin thẻ không hợp lệ!");
+            return false;
+        }
+        System.out.println("Thanh toán " + amount + " VND bằng thẻ tín dụng " + cardNumber + " thành công!");
+        return true;
+    }
+
+    @Override
+    public String getPaymentMethodName() {
+        return "Credit Card";
+    }
+
+    @Override
+    public String toString() {
+        return "CreditCardPayment[cardNumber=" + cardNumber + ", cardHolderName=" + cardHolderName
+                + ", cvv=" + cvv + ", expiryDate=" + expiryDate + "]";
+    }
 }
